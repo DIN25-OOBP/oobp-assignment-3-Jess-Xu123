@@ -15,6 +15,23 @@ The class should have the following methods:
 */
 /* Write your Task 1 solution here */
 
+class Food {
+  name: string;
+  calories: number;
+  constructor(name: string, calories:number){
+    this.name = name;
+    this.calories = calories;
+  }
+
+getName(){
+  return this.name;
+}
+
+getFoodInfo(){
+  return `${this.name} has ${this.calories} calories`;
+}
+}
+
 
 
 /* Task 2 - Create a class Refrigerator. The purpose of the class is to store Food objects. 
@@ -40,6 +57,35 @@ The class should have the following methods:
 */
 /* Write your Task 2 solution here */
 
+class Refrigerator {
+  food: Food[]  = [];
+
+  addFood(food:Food):void{
+    this.food.push(food);
+  }
+
+  getContents():string[]{
+    return this.food.map(f => f.name);
+  }
+
+  eatFood(foodName:string): string {
+    const index = this.food.findIndex(f => f.name === foodName);
+    if (index === -1) return `There is no ${foodName} in the refrigerator`;
+    const[food] = this.food.splice(index, 1);
+    return `You ate ${food.name} with ${food.calories} calories`;
+
+  }
+
+  getTotalCalories(): number {
+    let total = 0;
+    this.food.forEach(f => total += f.calories);
+    return total;
+  }
+
+  getNumberOfFoodItems(): number {
+    return this.food.length;
+  }
+}
 
 
 export { Food, Refrigerator };
